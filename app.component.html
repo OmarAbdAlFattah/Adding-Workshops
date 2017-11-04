@@ -1,0 +1,41 @@
+<div *ngIf = "!name; else forminfo">
+
+
+  <form  [formGroup] = "rForm" (ngSubmit) = "addPost(rForm.value)">  <!--After Submitting-->
+  
+  <div class="form-container">
+    <div class="row columns">
+          
+    <h1>Add a Workshop</h1>
+  
+    <label>Name
+        <div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">{{ titleAlert }}</div>
+      <input type = "text" formControlName = "name"/>
+    </label>
+
+    <label>Description
+        <div class="alert" *ngIf="!rForm.controls['description'].valid && rForm.controls['description'].touched">You must specify a description that's between 30 and 1000 characters.</div>
+      <textarea formControlName="description" ></textarea>
+    </label>
+
+    <input type = "checkbox" name = "validate" formControlName = "validate" value="1">On  
+    <input type = "submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid">
+    </div>
+  
+  </div>
+
+  </form>
+
+</div>
+
+<ng-template #forminfo>
+    <div class="form-container">
+        <div class="row columns">
+
+          <h1>{{name}}</h1>
+          <p><b>{{description}}</b></p>
+        
+        </div>
+    </div>
+</ng-template>
+
